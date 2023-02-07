@@ -1,20 +1,20 @@
 package baldufal.goldesel.ui.cash
 
 import androidx.lifecycle.ViewModel
-import baldufal.goldesel.model.ListElement
-import java.time.Instant
-import java.util.*
+import baldufal.goldesel.model.Transaction
+import java.time.LocalDateTime
 
 class CashViewModel : ViewModel() {
 
-    val entries = arrayListOf<ListElement>(
-        ListElement(
-            "Apfeltasche", 380, Date.from(Instant.now()),
+    val entries = arrayListOf<Transaction>(
+        Transaction(
+            "Apfeltasche",
+            380,
+            LocalDateTime.now(),
             investment = false,
             essential = true,
-            dateAdded = Date.from(
-                Instant.now()
-            )
+            giro = false,
+            dateAdded = LocalDateTime.now()
         )
     )
 

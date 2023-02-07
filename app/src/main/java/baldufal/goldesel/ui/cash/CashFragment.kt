@@ -1,12 +1,13 @@
 package baldufal.goldesel.ui.cash
 
-import ListElementAdapter
+import TransactionAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import baldufal.goldesel.databinding.FragmentCashBinding
 
@@ -31,12 +32,16 @@ class CashFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         @Suppress("UNCHECKED_CAST")
         binding.recyclerView.adapter =
-            ListElementAdapter(cashViewModel.entries)
+            TransactionAdapter(cashViewModel.entries)
 
         binding.refreshLayout.setOnRefreshListener {
             cashViewModel.refresh()
-            (binding.recyclerView.adapter as ListElementAdapter).notifyDataSetChanged()
+            (binding.recyclerView.adapter as TransactionAdapter).notifyDataSetChanged()
             binding.refreshLayout.isRefreshing = false
+        }
+
+        binding.fabAdd.setOnClickListener {
+            findNavController().navigate(CashFragmentDirections.actionNavigationCashToAddFragment())
         }
 
         return binding.root

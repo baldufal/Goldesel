@@ -2,17 +2,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import baldufal.goldesel.databinding.ListelementBinding
-import baldufal.goldesel.model.ListElement
+import baldufal.goldesel.model.Transaction
+import java.time.format.DateTimeFormatter
 
-class ListElementAdapter(private val entries: ArrayList<ListElement>) :
-    RecyclerView.Adapter<ListElementAdapter.ElementViewHolder>() {
+class TransactionAdapter(private val entries: ArrayList<Transaction>) :
+    RecyclerView.Adapter<TransactionAdapter.ElementViewHolder>() {
 
     class ElementViewHolder(private val binding: ListelementBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ListElement) {
+        private val formatter = DateTimeFormatter.ofPattern("dd.MM")
+
+        fun bind(item: Transaction) {
             binding.name.text = item.name
-            binding.date.text = "12.03."
-            binding.value.text = String.format("%.2f", item.cents / 100.0)
+            binding.date.text = item.date.format(formatter)
+            binding.value.text = String.format("%.2f€", item.cents / 100.0)
             if(item.essential) {
                 binding.essential.text = "essential"
             }else{

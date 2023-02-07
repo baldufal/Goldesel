@@ -3,23 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_cash">
+    app:startDestination="@id/navigation_cash">
 
     <fragment
         android:id="@+id/navigation_cash"
         android:name="baldufal.goldesel.ui.cash.CashFragment"
         android:label="Cash"
-        tools:layout="@layout/fragment_cash" />
+        tools:layout="@layout/fragment_cash" >
+        <action
+            android:id="@+id/action_navigation_cash_to_addFragment"
+            app:destination="@id/addFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_giro"
         android:name="baldufal.goldesel.ui.giro.GiroFragment"
         android:label="Giro"
-        tools:layout="@layout/fragment_giro" />
+        tools:layout="@layout/fragment_giro" >
+        <action
+            android:id="@+id/action_navigation_giro_to_addFragment"
+            app:destination="@id/addFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_analysis"
         android:name="baldufal.goldesel.ui.analysis.AnalysisFragment"
         android:label="Analysis"
         tools:layout="@layout/fragment_analysis" />
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="baldufal.goldesel.ui.AddFragment"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" />
 </navigation>
