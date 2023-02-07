@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_cash">
+
+    <fragment
+        android:id="@+id/navigation_cash"
+        android:name="baldufal.goldesel.ui.cash.CashFragment"
+        android:label="Cash"
+        tools:layout="@layout/fragment_cash" />
+
+    <fragment
+        android:id="@+id/navigation_giro"
+        android:name="baldufal.goldesel.ui.giro.GiroFragment"
+        android:label="Giro"
+        tools:layout="@layout/fragment_giro" />
+
+    <fragment
+        android:id="@+id/navigation_analysis"
+        android:name="baldufal.goldesel.ui.analysis.AnalysisFragment"
+        android:label="Analysis"
+        tools:layout="@layout/fragment_analysis" />
+</navigation>
