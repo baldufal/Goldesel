@@ -1,10 +1,10 @@
-package baldufal.goldesel.ui.cash
+package baldufal.goldesel.ui.list_display
 
 import androidx.lifecycle.ViewModel
 import baldufal.goldesel.model.Transaction
 import java.time.LocalDateTime
 
-class CashViewModel : ViewModel() {
+class LDViewModel : ViewModel() {
 
     val entries = arrayListOf<Transaction>(
         Transaction(

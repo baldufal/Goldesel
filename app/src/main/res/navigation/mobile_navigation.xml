@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/navigation_cash">
+    app:startDestination="@id/navigation_giro">
 
     <fragment
         android:id="@+id/navigation_cash"
-        android:name="baldufal.goldesel.ui.cash.CashFragment"
+        android:name="baldufal.goldesel.ui.list_display.CashFragment"
         android:label="Cash"
         tools:layout="@layout/fragment_cash" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/navigation_giro"
-        android:name="baldufal.goldesel.ui.giro.GiroFragment"
+        android:name="baldufal.goldesel.ui.list_display.GiroFragment"
         android:label="Giro"
         tools:layout="@layout/fragment_giro" >
         <action
@@ -33,6 +33,6 @@
     <fragment
         android:id="@+id/addFragment"
         android:name="baldufal.goldesel.ui.AddFragment"
-        android:label="fragment_add"
+        android:label="Add Transaction"
         tools:layout="@layout/fragment_add" />
 </navigation>

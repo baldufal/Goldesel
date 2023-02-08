@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginHorizontal="10sp"
     tools:context=".ui.AddFragment">
 
     <RadioGroup
@@ -29,8 +30,8 @@
             android:text="Cash" />
     </RadioGroup>
 
-    <TextView
-        android:id="@+id/textView"
+    <EditText
+        android:id="@+id/et_Name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Please enter name"
@@ -40,54 +41,71 @@
 
     <Button
         android:id="@+id/btn_essential"
-        android:layout_width="0sp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Essential"
-        app:layout_constraintTop_toBottomOf="@id/textView"
+        android:layout_marginEnd="5sp"
+        app:layout_constraintTop_toBottomOf="@id/et_Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_luxury"/>
 
     <Button
         android:id="@+id/btn_luxury"
-        android:layout_width="0sp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Luxury"
-        app:layout_constraintTop_toBottomOf="@id/textView"
+        android:layout_marginStart="5sp"
+        app:layout_constraintTop_toBottomOf="@id/et_Name"
         app:layout_constraintStart_toEndOf="@id/btn_essential"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
         android:id="@+id/btn_investment"
-        android:layout_width="0sp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Investment"
+        android:layout_marginEnd="5sp"
         app:layout_constraintTop_toBottomOf="@id/btn_essential"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_consumption"/>
 
     <Button
         android:id="@+id/btn_consumption"
-        android:layout_width="0sp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Consumption"
+        android:layout_marginStart="5sp"
         app:layout_constraintTop_toBottomOf="@id/btn_luxury"
         app:layout_constraintStart_toEndOf="@id/btn_investment"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <EditText
+        android:id="@+id/et_Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="Tap to change date"
+        app:layout_constraintTop_toBottomOf="@id/btn_consumption"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
     <Button
         android:id="@+id/btn_cancel"
-        android:layout_width="0sp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Cancel"
+        android:layout_marginEnd="5sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_add"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <Button
         android:id="@+id/btn_add"
-        android:layout_width="0sp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Add"
+        android:layout_marginStart="5sp"
         app:layout_constraintStart_toEndOf="@id/btn_cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

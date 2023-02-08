@@ -1,4 +1,4 @@
-package baldufal.goldesel.ui.cash
+package baldufal.goldesel.ui.list_display
 
 import TransactionAdapter
 import android.os.Bundle
@@ -25,7 +25,7 @@ class CashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val cashViewModel =
-            ViewModelProvider(this).get(CashViewModel::class.java)
+            ViewModelProvider(this).get(LDViewModel::class.java)
 
         _binding = FragmentCashBinding.inflate(inflater, container, false)
 

@@ -1,6 +1,8 @@
 package baldufal.goldesel.ui
 
+import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +28,12 @@ class AddFragment : Fragment() {
 
         binding.btnCancel.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        binding.etDate.inputType = InputType.TYPE_NULL
+        binding.etDate.setOnClickListener {
+            val picker = DatePickerDialog(this.requireContext())
+            picker.show()
         }
 
         return binding.root

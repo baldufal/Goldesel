@@ -1,5 +1,6 @@
-package baldufal.goldesel.ui.giro
+package baldufal.goldesel.ui.list_display
 
+import TransactionAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import baldufal.goldesel.databinding.FragmentGiroBinding
 
 class GiroFragment : Fragment() {
@@ -23,16 +26,26 @@ class GiroFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val giroViewModel =
-            ViewModelProvider(this).get(GiroViewModel::class.java)
+            ViewModelProvider(this).get(LDViewModel::class.java)
 
         _binding = FragmentGiroBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        giroViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        @Suppress("UNCHECKED_CAST")
+        binding.recyclerView.adapter =
+            TransactionAdapter(giroViewModel.entries)
+
+        binding.refreshLayout.setOnRefreshListener {
+            giroViewModel.refresh()
+            (binding.recyclerView.adapter as TransactionAdapter).notifyDataSetChanged()
+            binding.refreshLayout.isRefreshing = false
         }
-        return root
+
+        binding.fabAdd.setOnClickListener {
+            findNavController().navigate(GiroFragmentDirections.actionNavigationGiroToAddFragment())
+        }
+
+        return binding.root
     }
 
     override fun onDestroyView() {

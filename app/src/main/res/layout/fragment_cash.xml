@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.cash.CashFragment">
+    tools:context=".ui.list_display.CashFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout"
@@ -23,12 +23,12 @@
         android:id="@+id/fab_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="end"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="76dp"
-        android:src="@drawable/ic_baseline_add_24"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:contentDescription="add entry" />
+        android:layout_marginBottom="16dp"
+        android:contentDescription="add entry"
+        android:src="@drawable/ic_baseline_add_24" />
 
 </RelativeLayout>
