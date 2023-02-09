@@ -1,17 +1,22 @@
 package baldufal.goldesel.model
 
-import java.time.LocalDateTime
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 
 @Entity(tableName = "table_transactions")
 data class Transaction(
-    val name: String,
-    val cents: Int,
-    val date: LocalDateTime,
-    val giro: Boolean, // Giro or cash
-    val investment: Boolean, // Investment or  Consumption
-    val essential: Boolean, // Essential or luxury
     @PrimaryKey
-    val dateAdded: LocalDateTime
+    val id: String,
+    var name: String,
+    var cents: Int,
+    var date: LocalDateTime,
+    var giro: Boolean, // Giro or cash
+    var investment: Boolean, // Investment or  Consumption
+    var essential: Boolean, // Essential or luxury
+    val dateAdded: LocalDateTime,
+    var notes: String,
+    var tags: List<String>
 )

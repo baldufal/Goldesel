@@ -5,7 +5,7 @@ import baldufal.goldesel.databinding.ListelementBinding
 import baldufal.goldesel.model.Transaction
 import java.time.format.DateTimeFormatter
 
-class TransactionAdapter(private val entries: ArrayList<Transaction>) :
+class TransactionAdapter(private val entries: MutableList<Transaction>) :
     RecyclerView.Adapter<TransactionAdapter.ElementViewHolder>() {
 
     class ElementViewHolder(private val binding: ListelementBinding) :

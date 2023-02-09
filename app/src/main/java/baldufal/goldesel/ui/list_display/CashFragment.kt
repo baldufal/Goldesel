@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import baldufal.goldesel.databinding.FragmentCashBinding
@@ -24,18 +24,17 @@ class CashFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val cashViewModel =
-            ViewModelProvider(this).get(LDViewModel::class.java)
+        val viewModel: LDViewModel by activityViewModels()
 
         _binding = FragmentCashBinding.inflate(inflater, container, false)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         @Suppress("UNCHECKED_CAST")
         binding.recyclerView.adapter =
-            TransactionAdapter(cashViewModel.entries)
+            TransactionAdapter(viewModel.cashTransactions)
 
         binding.refreshLayout.setOnRefreshListener {
-            cashViewModel.refresh()
+            // todo: refresh
             (binding.recyclerView.adapter as TransactionAdapter).notifyDataSetChanged()
             binding.refreshLayout.isRefreshing = false
         }

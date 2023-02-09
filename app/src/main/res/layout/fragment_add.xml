@@ -5,90 +5,142 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="10sp"
-    tools:context=".ui.AddFragment">
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="5dp"
+    tools:context=".ui.AddFragment"
+    tools:ignore="HardcodedText">
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_cancel"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <RadioButton
-            android:id="@+id/rbtn_giro"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Giro" />
+            >
 
-        <RadioButton
-            android:id="@+id/rbtn_cash"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cash" />
-    </RadioGroup>
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/et_Name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Please enter name"
-        app:layout_constraintTop_toBottomOf="@id/radioGroup"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+                <RadioButton
+                    android:id="@+id/rbtn_giro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Giro" />
 
-    <Button
-        android:id="@+id/btn_essential"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Essential"
-        android:layout_marginEnd="5sp"
-        app:layout_constraintTop_toBottomOf="@id/et_Name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_luxury"/>
+                <RadioButton
+                    android:id="@+id/rbtn_cash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cash" />
+            </RadioGroup>
 
-    <Button
-        android:id="@+id/btn_luxury"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Luxury"
-        android:layout_marginStart="5sp"
-        app:layout_constraintTop_toBottomOf="@id/et_Name"
-        app:layout_constraintStart_toEndOf="@id/btn_essential"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            <EditText
+                android:id="@+id/et_cents"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:ems="7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup"
+                android:inputType="number" />
 
-    <Button
-        android:id="@+id/btn_investment"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Investment"
-        android:layout_marginEnd="5sp"
-        app:layout_constraintTop_toBottomOf="@id/btn_essential"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_consumption"/>
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
 
-    <Button
-        android:id="@+id/btn_consumption"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Consumption"
-        android:layout_marginStart="5sp"
-        app:layout_constraintTop_toBottomOf="@id/btn_luxury"
-        app:layout_constraintStart_toEndOf="@id/btn_investment"
-        app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_cents" />
 
-    <EditText
-        android:id="@+id/et_Date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:text="Tap to change date"
-        app:layout_constraintTop_toBottomOf="@id/btn_consumption"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            <Button
+                android:id="@+id/btn_essential"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5sp"
+                android:text="Essential"
+                app:layout_constraintEnd_toStartOf="@id/btn_luxury"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_name" />
 
+            <Button
+                android:id="@+id/btn_luxury"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5sp"
+                android:text="Luxury"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_essential"
+                app:layout_constraintTop_toBottomOf="@id/et_name" />
+
+            <Button
+                android:id="@+id/btn_investment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5sp"
+                android:text="Investment"
+                app:layout_constraintEnd_toStartOf="@id/btn_consumption"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_essential" />
+
+            <Button
+                android:id="@+id/btn_consumption"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5sp"
+                android:text="Consumption"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_investment"
+                app:layout_constraintTop_toBottomOf="@id/btn_luxury" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_consumption" />
+
+            <EditText
+                android:id="@+id/et_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="Tap to change date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_date" />
+
+            <TextView
+                android:id="@+id/tv_notes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notes"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_date" />
+
+            <EditText
+                android:id="@+id/et_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:inputType="textMultiLine"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_notes" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/btn_cancel"

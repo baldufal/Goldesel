@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import baldufal.goldesel.databinding.FragmentGiroBinding
@@ -25,18 +24,17 @@ class GiroFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val giroViewModel =
-            ViewModelProvider(this).get(LDViewModel::class.java)
+        val viewModel: LDViewModel by activityViewModels()
 
         _binding = FragmentGiroBinding.inflate(inflater, container, false)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         @Suppress("UNCHECKED_CAST")
         binding.recyclerView.adapter =
-            TransactionAdapter(giroViewModel.entries)
+            TransactionAdapter(viewModel.giroTransactions)
 
         binding.refreshLayout.setOnRefreshListener {
-            giroViewModel.refresh()
+            // todo: refresh
             (binding.recyclerView.adapter as TransactionAdapter).notifyDataSetChanged()
             binding.refreshLayout.isRefreshing = false
         }
