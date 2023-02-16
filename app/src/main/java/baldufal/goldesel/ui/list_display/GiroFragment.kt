@@ -40,7 +40,11 @@ class GiroFragment : Fragment() {
         }
 
         binding.fabAdd.setOnClickListener {
-            findNavController().navigate(GiroFragmentDirections.actionNavigationGiroToAddFragment())
+            findNavController().navigate(
+                GiroFragmentDirections.actionNavigationGiroToAddFragment(
+                    true
+                )
+            )
         }
 
         return binding.root

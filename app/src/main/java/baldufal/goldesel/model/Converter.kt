@@ -23,6 +23,6 @@ class Converters {
     @TypeConverter
     fun list2string(value: List<String>): String {
         val sortedTags = value.sorted()
-        return value.joinToString(",")
+        return sortedTags.joinToString(",")
     }
 }

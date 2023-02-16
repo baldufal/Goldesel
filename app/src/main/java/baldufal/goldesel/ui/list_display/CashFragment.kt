@@ -40,7 +40,11 @@ class CashFragment : Fragment() {
         }
 
         binding.fabAdd.setOnClickListener {
-            findNavController().navigate(CashFragmentDirections.actionNavigationCashToAddFragment())
+            findNavController().navigate(
+                CashFragmentDirections.actionNavigationCashToAddFragment(
+                    false
+                )
+            )
         }
 
         return binding.root

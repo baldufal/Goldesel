@@ -34,5 +34,9 @@
         android:id="@+id/addFragment"
         android:name="baldufal.goldesel.ui.AddFragment"
         android:label="Add Transaction"
-        tools:layout="@layout/fragment_add" />
+        tools:layout="@layout/fragment_add" >
+        <argument
+            android:name="giro"
+            app:argType="boolean" />
+    </fragment>
 </navigation>

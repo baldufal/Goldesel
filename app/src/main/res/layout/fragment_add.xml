@@ -10,11 +10,31 @@
     tools:context=".ui.AddFragment"
     tools:ignore="HardcodedText">
 
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_marginEnd="5sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_add_top"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/btn_add_top"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:layout_marginStart="5sp"
+        app:layout_constraintStart_toEndOf="@id/btn_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/btn_cancel"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_cancel">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -49,60 +69,108 @@
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
                 android:ems="7"
+                android:hint="Value"
+                android:inputType="numberDecimal|numberSigned"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/radioGroup"
-                android:inputType="number" />
+                app:layout_constraintTop_toBottomOf="@id/radioGroup"/>
 
             <EditText
                 android:id="@+id/et_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
-
+                android:inputType="text"
+                android:maxLines="1"
+                android:hint="Title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_cents" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_essential"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5sp"
+                android:layout_marginEnd="5dp"
+                android:padding="20dp"
                 android:text="Essential"
+                app:strokeColor="@color/gold"
                 app:layout_constraintEnd_toStartOf="@id/btn_luxury"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_name" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_luxury"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5sp"
+                android:layout_marginStart="5dp"
+                android:padding="20dp"
                 android:text="Luxury"
+                app:strokeColor="@color/gold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/btn_essential"
                 app:layout_constraintTop_toBottomOf="@id/et_name" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_investment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5sp"
+                android:layout_marginEnd="5dp"
+                android:padding="20dp"
                 android:text="Investment"
+                app:strokeColor="@color/gold"
                 app:layout_constraintEnd_toStartOf="@id/btn_consumption"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_essential" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_consumption"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5sp"
+                android:layout_marginStart="5dp"
+                android:padding="20dp"
                 android:text="Consumption"
+                app:strokeColor="@color/gold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/btn_investment"
                 app:layout_constraintTop_toBottomOf="@id/btn_luxury" />
+
+            <Space
+                android:id="@+id/space"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_investment"/>
+
+            <TextView
+                android:id="@+id/tv_optional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Optional"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/space" />
+
+            <TextView
+                android:id="@+id/tv_depreciation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Depreciation [years]"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/et_depreciation"
+                app:layout_constraintBottom_toBottomOf="@id/et_depreciation"/>
+
+            <EditText
+                android:id="@+id/et_depreciation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:inputType="numberDecimal|numberSigned"
+                android:maxLines="1"
+                android:hint="Period"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_optional" />
 
             <TextView
                 android:id="@+id/tv_date"
@@ -110,15 +178,34 @@
                 android:layout_height="wrap_content"
                 android:text="Date"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_consumption" />
+                app:layout_constraintTop_toBottomOf="@id/et_depreciation" />
 
-            <EditText
-                android:id="@+id/et_date"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                app:layout_constraintStart_toStartOf="@id/btn_time"
+                app:layout_constraintTop_toBottomOf="@id/et_depreciation" />
+
+            <Button
+                android:id="@+id/btn_date"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
-                android:text="Tap to change date"
+                android:layout_marginEnd="5dp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_time"
+                app:layout_constraintTop_toBottomOf="@id/tv_date" />
+
+            <Button
+                android:id="@+id/btn_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:layout_marginStart="5dp"
+                app:layout_constraintStart_toEndOf="@id/btn_date"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
             <TextView
@@ -127,7 +214,7 @@
                 android:layout_height="wrap_content"
                 android:text="Notes"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_date" />
+                app:layout_constraintTop_toBottomOf="@id/btn_date" />
 
             <EditText
                 android:id="@+id/et_notes"
@@ -138,29 +225,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_notes" />
 
-
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:layout_marginStart="5sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_notes"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-    <Button
-        android:id="@+id/btn_cancel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:layout_marginEnd="5sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_add"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <Button
-        android:id="@+id/btn_add"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Add"
-        android:layout_marginStart="5sp"
-        app:layout_constraintStart_toEndOf="@id/btn_cancel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
