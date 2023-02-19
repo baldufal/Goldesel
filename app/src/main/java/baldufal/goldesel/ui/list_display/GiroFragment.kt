@@ -1,6 +1,7 @@
 package baldufal.goldesel.ui.list_display
 
-import TransactionAdapter
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import baldufal.goldesel.databinding.FragmentGiroBinding
+import baldufal.goldesel.model.Transaction
+import baldufal.goldesel.model.TransactionType
+import baldufal.goldesel.ui.TransactionAdapter
 
-class GiroFragment : Fragment() {
+class GiroFragment : Fragment(), TransactionLongClickListener {
 
     private var _binding: FragmentGiroBinding? = null
 
@@ -19,6 +23,7 @@ class GiroFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,10 +34,11 @@ class GiroFragment : Fragment() {
         _binding = FragmentGiroBinding.inflate(inflater, container, false)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-        @Suppress("UNCHECKED_CAST")
-        binding.recyclerView.adapter =
-            TransactionAdapter(viewModel.giroTransactions)
-
+        val adapter = TransactionAdapter(viewModel.giroTransactions, this)
+        binding.recyclerView.adapter = adapter
+        viewModel.giroTransactions.observe(
+            viewLifecycleOwner
+        ) { adapter.notifyDataSetChanged() }
         binding.refreshLayout.setOnRefreshListener {
             // todo: refresh
             (binding.recyclerView.adapter as TransactionAdapter).notifyDataSetChanged()
@@ -42,7 +48,7 @@ class GiroFragment : Fragment() {
         binding.fabAdd.setOnClickListener {
             findNavController().navigate(
                 GiroFragmentDirections.actionNavigationGiroToAddFragment(
-                    true
+                    TransactionType.GIRO
                 )
             )
         }
@@ -53,5 +59,33 @@ class GiroFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    // DUPLICATE
+    override fun onTransactionLongClick(view: View, transaction: Transaction?) {
+        if (transaction == null)
+            return
+        val alertDialog: AlertDialog = AlertDialog.Builder(binding.root.context).create()
+        alertDialog.setTitle("Edit Transaction")
+        alertDialog.setMessage(transaction.name)
+
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "Edit"
+        ) { _, _ ->
+            findNavController().navigate(
+                GiroFragmentDirections.actionNavigationGiroToAddFragment(
+                    transaction.ttype,
+                    transaction
+                )
+            )
+        }
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Cancel") { _, _ -> }
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Delete") { _, _ ->
+            activityViewModels<LDViewModel>().value.delete(transaction)
+        }
+
+        alertDialog.show()
     }
 }

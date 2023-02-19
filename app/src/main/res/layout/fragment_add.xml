@@ -61,6 +61,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cash" />
+
+                <RadioButton
+                    android:id="@+id/rbtn_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Other" />
             </RadioGroup>
 
             <EditText
@@ -161,6 +167,7 @@
                 app:layout_constraintTop_toTopOf="@id/et_depreciation"
                 app:layout_constraintBottom_toBottomOf="@id/et_depreciation"/>
 
+
             <EditText
                 android:id="@+id/et_depreciation"
                 android:layout_width="wrap_content"
@@ -173,12 +180,27 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_optional" />
 
             <TextView
+                android:id="@+id/tv_tags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_depreciation"/>
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/tv_tags"
+                app:layout_constraintTop_toBottomOf="@id/et_depreciation"/>
+
+            <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Date"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_depreciation" />
+                app:layout_constraintTop_toBottomOf="@id/spinner" />
 
             <TextView
                 android:id="@+id/tv_time"
@@ -186,7 +208,7 @@
                 android:layout_height="wrap_content"
                 android:text="Time"
                 app:layout_constraintStart_toStartOf="@id/btn_time"
-                app:layout_constraintTop_toBottomOf="@id/et_depreciation" />
+                app:layout_constraintTop_toBottomOf="@id/spinner" />
 
             <Button
                 android:id="@+id/btn_date"

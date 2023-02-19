@@ -1,22 +1,26 @@
 package baldufal.goldesel.model
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
 @Dao
 interface TransactionDao {
-    @Insert
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTransaction(transaction: Transaction)
 
-    @Query("SELECT * FROM table_transactions")
+    @Query("SELECT * FROM table_transactions WHERE ttype = 'GIRO' ORDER BY dateAdded DESC")
     // query functions use own dispatcher -> no "suspend" needed
-    fun getCashTransactions(): List<Transaction>
+    fun getGiroTransactions(): LiveData<List<Transaction>>
 
-    @Query("SELECT * FROM table_transactions")
+    @Query("SELECT * FROM table_transactions WHERE ttype = 'CASH' ORDER BY dateAdded DESC")
     // query functions use own dispatcher -> no "suspend" needed
-    fun getGiroTransactions(): List<Transaction>
+    fun getCashTransactions(): LiveData<List<Transaction>>
+
+    @Query("SELECT * FROM table_transactions WHERE ttype = 'OTHER' ORDER BY dateAdded DESC")
+    // query functions use own dispatcher -> no "suspend" needed
+    fun getOtherTransactions(): LiveData<List<Transaction>>
+
 
     @Delete
     suspend fun deleteTransaction(transaction: Transaction)

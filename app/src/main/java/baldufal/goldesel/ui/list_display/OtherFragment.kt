@@ -10,14 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import baldufal.goldesel.databinding.FragmentCashBinding
+import baldufal.goldesel.databinding.FragmentOtherBinding
 import baldufal.goldesel.model.Transaction
 import baldufal.goldesel.model.TransactionType
 import baldufal.goldesel.ui.TransactionAdapter
 
-class CashFragment : Fragment(), TransactionLongClickListener {
+class OtherFragment : Fragment(), TransactionLongClickListener {
 
-    private var _binding: FragmentCashBinding? = null
+    private var _binding: FragmentOtherBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -31,27 +31,25 @@ class CashFragment : Fragment(), TransactionLongClickListener {
     ): View {
         val viewModel: LDViewModel by activityViewModels()
 
-        _binding = FragmentCashBinding.inflate(inflater, container, false)
+        _binding = FragmentOtherBinding.inflate(inflater, container, false)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
 
-        val adapter = TransactionAdapter(viewModel.cashTransactions, this)
-
+        val adapter = TransactionAdapter(viewModel.otherTransactions, this)
         binding.recyclerView.adapter = adapter
-
-        viewModel.cashTransactions.observe(
+        viewModel.otherTransactions.observe(
             viewLifecycleOwner
         ) { adapter.notifyDataSetChanged() }
-
         binding.refreshLayout.setOnRefreshListener {
+            // todo: refresh
             (binding.recyclerView.adapter as TransactionAdapter).notifyDataSetChanged()
             binding.refreshLayout.isRefreshing = false
         }
 
         binding.fabAdd.setOnClickListener {
             findNavController().navigate(
-                CashFragmentDirections.actionNavigationCashToAddFragment(
-                    TransactionType.CASH
+                OtherFragmentDirections.actionOtherFragmentToAddFragment(
+                    TransactionType.OTHER
                 )
             )
         }
@@ -76,9 +74,8 @@ class CashFragment : Fragment(), TransactionLongClickListener {
             AlertDialog.BUTTON_POSITIVE, "Edit"
         ) { _, _ ->
             findNavController().navigate(
-                CashFragmentDirections.actionNavigationCashToAddFragment(
-                    transaction.ttype,
-                    transaction
+                OtherFragmentDirections.actionOtherFragmentToAddFragment(
+                    transaction.ttype, transaction
                 )
             )
         }

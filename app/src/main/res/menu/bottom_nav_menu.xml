@@ -10,6 +10,12 @@
         android:id="@+id/navigation_cash"
         android:icon="@drawable/ic_baseline_money_24"
         android:title="Cash" />
+
+    <item
+        android:id="@+id/navigation_other"
+        android:icon="@drawable/ic_baseline_group_24"
+        android:title="Other" />
+
     <item
         android:id="@+id/navigation_analysis"
         android:icon="@drawable/ic_dashboard_black_24dp"

@@ -1,8 +1,10 @@
 package baldufal.goldesel.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
+import java.io.Serializable
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 
@@ -13,10 +15,11 @@ data class Transaction(
     var name: String,
     var cents: Int,
     var date: LocalDateTime,
-    var giro: Boolean, // Giro or cash
+    var ttype: TransactionType, // Giro or cash or other
     var investment: Boolean, // Investment or  Consumption
     var essential: Boolean, // Essential or luxury
+    var depreciation: Double,
     val dateAdded: LocalDateTime,
     var notes: String,
     var tags: List<String>
-)
+):Serializable
