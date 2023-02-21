@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.RadioGroup
 import android.widget.Toast
@@ -16,6 +15,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import baldufal.goldesel.databinding.FragmentAddBinding
 import baldufal.goldesel.model.Transaction
+import baldufal.goldesel.model.TransactionCategory
 import baldufal.goldesel.model.TransactionType
 import baldufal.goldesel.ui.list_display.LDViewModel
 import java.time.LocalDate
@@ -35,12 +35,11 @@ class AddFragment : Fragment() {
         cents = 0,
         LocalDateTime.now(),
         TransactionType.CASH,
-        investment = false,
-        essential = false,
+        TransactionCategory.LUXURY_CONSUMPTION,
         -1.0,
         LocalDateTime.now(),
         "",
-        listOf<String>()
+        listOf()
     )
 
     private var _binding: FragmentAddBinding? = null
@@ -110,48 +109,72 @@ class AddFragment : Fragment() {
         binding.etName.setText(trans.name)
 
         fun updateButtonState() {
-            if (trans.essential) {
-                binding.btnEssential.strokeWidth = 20
-                binding.btnLuxury.strokeWidth = 0
-            } else {
-                binding.btnEssential.strokeWidth = 0
-                binding.btnLuxury.strokeWidth = 20
+            val STROKE = 20
+
+            var depreciation = View.GONE
+            var li = 0
+            var ei = 0
+            var lc = 0
+            var ec = 0
+            var ex = 0
+
+            when (trans.category) {
+                TransactionCategory.LUXURY_INVESTMENT -> {
+                    depreciation = View.VISIBLE
+                    li = STROKE
+                }
+                TransactionCategory.ESSENTIAL_INVESTMENT -> {
+                    depreciation = View.VISIBLE
+                    ei = STROKE
+                }
+                TransactionCategory.ESSENTIAL_CONSUMPTION ->
+                    ec = STROKE
+                TransactionCategory.LUXURY_CONSUMPTION ->
+                    lc = STROKE
+                TransactionCategory.EXCLUDE ->
+                    ex = STROKE
             }
-            if (trans.investment) {
-                binding.btnInvestment.strokeWidth = 20
-                binding.btnConsumption.strokeWidth = 0
-                binding.tvDepreciation.visibility = View.VISIBLE
-                binding.etDepreciation.visibility = View.VISIBLE
-            } else {
-                binding.btnInvestment.strokeWidth = 0
-                binding.btnConsumption.strokeWidth = 20
-                binding.tvDepreciation.visibility = View.GONE
-                binding.etDepreciation.visibility = View.GONE
-            }
+
+            binding.btnLi.strokeWidth = li
+            binding.btnLc.strokeWidth = lc
+            binding.btnEi.strokeWidth = ei
+            binding.btnEc.strokeWidth = ec
+            binding.btnExclude.strokeWidth = ex
+
+            binding.tvDepreciation.visibility = depreciation
+            binding.etDepreciation.visibility = depreciation
         }
 
         updateButtonState()
 
-        binding.btnEssential.setOnClickListener {
-            trans.essential = true
+        binding.btnEc.setOnClickListener {
+            trans.category = TransactionCategory.ESSENTIAL_CONSUMPTION
             updateButtonState()
         }
 
-        binding.btnLuxury.setOnClickListener {
-            trans.essential = false
+        binding.btnEi.setOnClickListener {
+            trans.category = TransactionCategory.ESSENTIAL_INVESTMENT
             updateButtonState()
         }
 
-        binding.btnInvestment.setOnClickListener {
-            trans.investment = true
+        binding.btnLc.setOnClickListener {
+            trans.category = TransactionCategory.LUXURY_CONSUMPTION
             updateButtonState()
         }
 
-        binding.btnConsumption.setOnClickListener {
-            trans.investment = false
+        binding.btnLi.setOnClickListener {
+            trans.category = TransactionCategory.LUXURY_INVESTMENT
             updateButtonState()
         }
 
+        binding.btnExclude.setOnClickListener {
+            trans.category = TransactionCategory.EXCLUDE
+            updateButtonState()
+        }
+
+        binding.tvTags.visibility = View.GONE
+        binding.spinner.visibility = View.GONE
+/*
         val tags = ldViewModel.getTags()
         tags.add("*NEW*")
         val tagsArray = tags.toTypedArray()
@@ -167,7 +190,7 @@ class AddFragment : Fragment() {
         // Apply the adapter to the spinner
         binding.spinner.adapter = adapter
 
-        /*
+
         {
             Toast.makeText(
                 requireContext(),
@@ -198,7 +221,6 @@ class AddFragment : Fragment() {
         }
 
         binding.btnTime.setOnClickListener {
-
             val picker = TimePickerDialog(
                 this.requireContext(),
                 { _, hourOfDay, minute ->
@@ -234,7 +256,11 @@ class AddFragment : Fragment() {
         trans.cents = cents
 
         var depreciation = -1.0
-        if (trans.investment && binding.etDepreciation.text.isNotEmpty())
+
+        if ((trans.category == TransactionCategory.LUXURY_INVESTMENT
+                    || trans.category == TransactionCategory.ESSENTIAL_INVESTMENT)
+            && binding.etDepreciation.text.isNotEmpty()
+        )
             try {
                 depreciation = binding.etDepreciation.text.toString().toDouble()
                 if (depreciation <= 0)
@@ -242,6 +268,7 @@ class AddFragment : Fragment() {
             } catch (e: Exception) {
                 return Pair("Cannot parse depreciation", null)
             }
+
         trans.depreciation = depreciation
 
         trans.notes = binding.etNotes.text.toString()
@@ -250,7 +277,6 @@ class AddFragment : Fragment() {
             null, trans
         )
     }
-
 
     companion object {
         @JvmStatic
@@ -261,5 +287,4 @@ class AddFragment : Fragment() {
                 }
             }
     }
-
 }

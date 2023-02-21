@@ -16,8 +16,7 @@ data class Transaction(
     var cents: Int,
     var date: LocalDateTime,
     var ttype: TransactionType, // Giro or cash or other
-    var investment: Boolean, // Investment or  Consumption
-    var essential: Boolean, // Essential or luxury
+    var category: TransactionCategory,
     var depreciation: Double,
     val dateAdded: LocalDateTime,
     var notes: String,

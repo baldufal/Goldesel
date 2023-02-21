@@ -94,52 +94,69 @@
                 app:layout_constraintTop_toBottomOf="@id/et_cents" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_essential"
+                android:id="@+id/btn_li"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
-                android:padding="20dp"
-                android:text="Essential"
+                android:padding="10dp"
+                app:icon="@drawable/luxury_investment"
+                android:text="LUXURY\nINVEST"
                 app:strokeColor="@color/gold"
-                app:layout_constraintEnd_toStartOf="@id/btn_luxury"
+                app:layout_constraintEnd_toStartOf="@id/btn_lc"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_name" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_luxury"
+                android:id="@+id/btn_lc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:padding="20dp"
-                android:text="Luxury"
+                android:padding="10dp"
+                app:icon="@drawable/luxury_consumption"
+                android:text="LUXURY\nCONSUME"
                 app:strokeColor="@color/gold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_essential"
+                app:layout_constraintStart_toEndOf="@id/btn_li"
                 app:layout_constraintTop_toBottomOf="@id/et_name" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_investment"
+                android:id="@+id/btn_ei"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
-                android:padding="20dp"
-                android:text="Investment"
+                android:padding="10dp"
+                app:icon="@drawable/essential_investment"
+                android:text="ESSENTIAL\nINVEST"
                 app:strokeColor="@color/gold"
-                app:layout_constraintEnd_toStartOf="@id/btn_consumption"
+                app:layout_constraintEnd_toStartOf="@id/btn_ec"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_essential" />
+                app:layout_constraintTop_toBottomOf="@id/btn_li" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_consumption"
+                android:id="@+id/btn_ec"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:padding="20dp"
-                android:text="Consumption"
+                android:padding="10dp"
+                app:icon="@drawable/essential_consumption"
+                android:text="ESSENTIAL\nCONSUME"
                 app:strokeColor="@color/gold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_investment"
-                app:layout_constraintTop_toBottomOf="@id/btn_luxury" />
+                app:layout_constraintStart_toEndOf="@id/btn_ei"
+                app:layout_constraintTop_toBottomOf="@id/btn_lc" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_exclude"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:padding="10dp"
+                app:icon="@drawable/exclude"
+                android:text="EXCLUDE"
+                app:strokeColor="@color/gold"
+                app:layout_constraintEnd_toEndOf="@+id/btn_ec"
+                app:layout_constraintStart_toStartOf="@+id/btn_ec"
+                app:layout_constraintTop_toBottomOf="@+id/btn_ec" />
 
             <Space
                 android:id="@+id/space"
@@ -147,7 +164,7 @@
                 android:layout_height="30dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_investment"/>
+                app:layout_constraintTop_toBottomOf="@id/btn_exclude"/>
 
             <TextView
                 android:id="@+id/tv_optional"

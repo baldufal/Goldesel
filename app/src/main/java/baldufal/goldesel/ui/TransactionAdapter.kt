@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import baldufal.goldesel.R
 import baldufal.goldesel.databinding.ListelementBinding
 import baldufal.goldesel.model.Transaction
+import baldufal.goldesel.model.TransactionCategory
 import baldufal.goldesel.model.TransactionType
 import baldufal.goldesel.ui.list_display.TransactionLongClickListener
 import java.time.LocalDateTime
@@ -31,44 +32,42 @@ class TransactionAdapter(
             binding.name.text = item.name
             binding.date.text = item.date.format(formatter)
             binding.value.text = String.format("%.2f€", item.cents / 100.0)
-            if (item.essential) {
-                binding.luxury.setImageResource(baldufal.goldesel.R.drawable.essential)
-                binding.luxury.setColorFilter(
-                    ContextCompat.getColor(
-                        binding.root.context,
-                        R.color.gold
-                    )
-                )
-            } else {
-                binding.luxury.setImageResource(R.drawable.luxury)
-                binding.luxury.setColorFilter(
-                    ContextCompat.getColor(
-                        binding.root.context,
-                        R.color.silver
-                    )
-                )
+
+            val gold = ContextCompat.getColor(
+                binding.root.context,
+                R.color.gold
+            )
+            val silver = ContextCompat.getColor(
+                binding.root.context,
+                R.color.silver
+            )
+            var li = silver
+            var ei = silver
+            var ec = silver
+            var lc = silver
+            when (item.category) {
+                TransactionCategory.LUXURY_INVESTMENT -> {
+                    li = gold
+                }
+                TransactionCategory.ESSENTIAL_INVESTMENT -> {
+                    ei = gold
+                }
+                TransactionCategory.ESSENTIAL_CONSUMPTION ->
+                    ec = gold
+                TransactionCategory.LUXURY_CONSUMPTION ->
+                    lc = gold
+                TransactionCategory.EXCLUDE -> {} // leave silver
             }
-            if (item.investment) {
-                binding.consumption.setImageResource(R.drawable.investment)
-                binding.consumption.setColorFilter(
-                    ContextCompat.getColor(
-                        binding.root.context,
-                        R.color.gold
-                    )
-                )
-            } else {
-                binding.consumption.setImageResource(R.drawable.consumption)
-                binding.consumption.setColorFilter(
-                    ContextCompat.getColor(
-                        binding.root.context,
-                        R.color.silver
-                    )
-                )
-            }
+            binding.li.setColorFilter(li)
+            binding.ei.setColorFilter(ei)
+            binding.ec.setColorFilter(ec)
+            binding.lc.setColorFilter(lc)
+
+
             if (item.notes.isNotEmpty())
                 binding.tvNotes.text = item.notes
 
-            if(item.tags.isNotEmpty()) {
+            if (item.tags.isNotEmpty()) {
                 var tags = ""
                 for (tag in item.tags)
                     tags += "$tag "
@@ -107,15 +106,14 @@ class TransactionAdapter(
                 0,
                 LocalDateTime.now(),
                 TransactionType.OTHER,
-                investment = false,
-                essential = false,
+                TransactionCategory.EXCLUDE,
                 depreciation = 0.0,
                 dateAdded = LocalDateTime.now(),
                 notes = "",
                 tags = listOf()
             )
         )
-        holder.binding.root.setOnLongClickListener{
+        holder.binding.root.setOnLongClickListener {
             listener.onTransactionLongClick(it, entries.value?.get(position))
             true
         }

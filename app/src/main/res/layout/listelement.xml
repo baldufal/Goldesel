@@ -45,18 +45,35 @@
             tools:text="12.03." />
 
         <ImageView
-            android:id="@+id/consumption"
+            android:id="@+id/ei"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            card_view:srcCompat="@drawable/consumption"
-            app:layout_constraintEnd_toStartOf="@id/luxury"
+            card_view:srcCompat="@drawable/essential_investment"
+            app:layout_constraintEnd_toStartOf="@id/li"
+            app:layout_constraintTop_toBottomOf="@id/value"/>
+
+        <ImageView
+            android:id="@+id/li"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            card_view:srcCompat="@drawable/luxury_investment"
+            app:layout_constraintEnd_toStartOf="@id/ec"
+            app:layout_constraintTop_toBottomOf="@id/value"/>
+
+
+        <ImageView
+            android:id="@+id/ec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            card_view:srcCompat="@drawable/essential_consumption"
+            app:layout_constraintEnd_toStartOf="@id/lc"
             app:layout_constraintTop_toBottomOf="@+id/value"/>
 
         <ImageView
-            android:id="@+id/luxury"
+            android:id="@+id/lc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            card_view:srcCompat="@drawable/luxury"
+            card_view:srcCompat="@drawable/luxury_consumption"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/value"/>
 
