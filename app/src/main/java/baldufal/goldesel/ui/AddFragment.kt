@@ -215,7 +215,7 @@ class AddFragment : Fragment() {
             picker.show()
             picker.setOnDateSetListener { _: DatePicker, year: Int, month: Int, day: Int ->
                 trans.date =
-                    LocalDateTime.of(LocalDate.of(year, month, day), trans.date.toLocalTime())
+                    LocalDateTime.of(LocalDate.of(year, month+1, day), trans.date.toLocalTime())
                 updateDateTime()
             }
         }
