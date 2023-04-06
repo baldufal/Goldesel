@@ -36,7 +36,8 @@ class AddFragment : Fragment() {
         LocalDateTime.now(),
         TransactionType.CASH,
         TransactionCategory.LUXURY_CONSUMPTION,
-        -1.0,
+        factor = 1.0,
+        depreciation = -1.0,
         LocalDateTime.now(),
         "",
         listOf()
@@ -141,6 +142,15 @@ class AddFragment : Fragment() {
             binding.btnEc.strokeWidth = ec
             binding.btnExclude.strokeWidth = ex
 
+            binding.switchShared.isChecked = trans.factor != 1.0
+            binding.switchShared.setOnCheckedChangeListener { _, _ ->
+                if (binding.switchShared.isChecked) {
+                    trans.factor = 0.5
+                } else {
+                    trans.factor = 1.0
+                }
+            }
+
             binding.tvDepreciation.visibility = depreciation
             binding.etDepreciation.visibility = depreciation
         }
@@ -215,7 +225,7 @@ class AddFragment : Fragment() {
             picker.show()
             picker.setOnDateSetListener { _: DatePicker, year: Int, month: Int, day: Int ->
                 trans.date =
-                    LocalDateTime.of(LocalDate.of(year, month+1, day), trans.date.toLocalTime())
+                    LocalDateTime.of(LocalDate.of(year, month + 1, day), trans.date.toLocalTime())
                 updateDateTime()
             }
         }

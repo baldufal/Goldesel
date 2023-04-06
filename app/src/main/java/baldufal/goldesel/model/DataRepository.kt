@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 
 
 class DataRepository(application: Application) {
@@ -32,5 +33,15 @@ class DataRepository(application: Application) {
         CoroutineScope(Dispatchers.IO).launch {
             dao.deleteTransaction(item)
         }
+    }
+
+    fun getGiroCount(from: LocalDateTime, to:LocalDateTime) : LiveData<Integer>{
+            return dao.getGiroCount(from, to)
+    }
+    fun getCashCount(from: LocalDateTime, to:LocalDateTime) : LiveData<Integer>{
+        return dao.getCashCount(from, to)
+    }
+    fun getOtherCount(from: LocalDateTime, to:LocalDateTime) : LiveData<Integer>{
+        return dao.getOtherCount(from, to)
     }
 }

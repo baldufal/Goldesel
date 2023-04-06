@@ -1,12 +1,9 @@
 package baldufal.goldesel.model
 
-import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
 import java.io.Serializable
 import java.time.LocalDateTime
-import java.time.ZoneOffset
 
 @Entity(tableName = "table_transactions")
 data class Transaction(
@@ -15,10 +12,11 @@ data class Transaction(
     var name: String,
     var cents: Int,
     var date: LocalDateTime,
-    var ttype: TransactionType, // Giro or cash or other
+    var ttype: TransactionType, // Giro or cash or other source
     var category: TransactionCategory,
+    var factor: Double, // Factor for cents. 1 for "normal" transactions or .5 for "shared" transactions
     var depreciation: Double,
     val dateAdded: LocalDateTime,
     var notes: String,
     var tags: List<String>
-):Serializable
+) : Serializable

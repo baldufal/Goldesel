@@ -107,6 +107,7 @@ class TransactionAdapter(
                 LocalDateTime.now(),
                 TransactionType.OTHER,
                 TransactionCategory.EXCLUDE,
+                factor = 1.0,
                 depreciation = 0.0,
                 dateAdded = LocalDateTime.now(),
                 notes = "",

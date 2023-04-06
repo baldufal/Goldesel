@@ -5,6 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import baldufal.goldesel.model.DataRepository
 import baldufal.goldesel.model.Transaction
+import baldufal.goldesel.model.TransactionType
+import java.time.LocalDateTime
 
 class LDViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -33,6 +35,18 @@ class LDViewModel(application: Application) : AndroidViewModel(application) {
 
     fun delete(transaction: Transaction) {
         repository.deleteItem(transaction)
+    }
+
+    fun getGiroCounts(from: LocalDateTime, to: LocalDateTime): LiveData<Integer>{
+        return repository.getGiroCount(from, to)
+    }
+
+    fun getCashCounts(from: LocalDateTime, to: LocalDateTime): LiveData<Integer>{
+        return repository.getCashCount(from, to)
+    }
+
+    fun getOtherCounts(from: LocalDateTime, to: LocalDateTime): LiveData<Integer>{
+        return repository.getOtherCount(from, to)
     }
 
 
